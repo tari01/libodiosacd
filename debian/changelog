@@ -1,3 +1,9 @@
+libodiosacd (20.5.12) unstable; urgency=medium
+
+  * Version bump
+
+ -- Robert Tari <robert@tari.in>  Mon, 12 May 2020 19:46:00 +0200
+
 libodiosacd (20.5.11) unstable; urgency=medium
 
   * Return track index with filename in callback
