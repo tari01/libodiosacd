@@ -446,6 +446,11 @@ static bool disc_ReadAreaToc(Disc *pDisc, int area_idx)
                         }
                     }
 
+                    if (pSacdArea->lAreaTrackTexts[i].sTrackPerformer == NULL)
+                    {
+                        pSacdArea->lAreaTrackTexts[i].sTrackPerformer = strdup("Unknown Artist");
+                    }
+
                     if (nArea == AREA_TWOCH)
                     {
                         pDisc->cDiscDetails.lTwoChTrackDetails[i].sTrackTitle = pSacdArea->lAreaTrackTexts[i].sTrackTitle;
