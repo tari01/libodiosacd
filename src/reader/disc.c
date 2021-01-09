@@ -1,5 +1,5 @@
 /*
-    Copyright 2015-2020 Robert Tari <robert@tari.in>
+    Copyright 2015-2021 Robert Tari <robert@tari.in>
     Copyright 2011-2019 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 
     This file is part of Odio SACD library.
@@ -448,7 +448,14 @@ static bool disc_ReadAreaToc(Disc *pDisc, int area_idx)
 
                     if (pSacdArea->lAreaTrackTexts[i].sTrackPerformer == NULL)
                     {
-                        pSacdArea->lAreaTrackTexts[i].sTrackPerformer = strdup("Unknown Artist");
+                        if (pDisc->cSacd.cMasterText.sAlbumArtist == NULL)
+                        {
+                            pSacdArea->lAreaTrackTexts[i].sTrackPerformer = strdup("Unknown Artist");
+                        }
+                        else
+                        {
+                            pSacdArea->lAreaTrackTexts[i].sTrackPerformer = strdup(pDisc->cSacd.cMasterText.sAlbumArtist);
+                        }
                     }
 
                     if (nArea == AREA_TWOCH)
