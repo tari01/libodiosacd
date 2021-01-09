@@ -44,7 +44,7 @@
     using the code for non MPEG-4 Audio conforming products. This copyright notice
     must be included in all copies of derivative works.
 
-    Copyright © 2004-2020.
+    Copyright © 2004-2021.
 
     This file is part of Odio SACD library.
 
@@ -132,7 +132,7 @@ void framereader_ReadTableSegmentData(StrData *pStrData, int nChannels, int Fram
     MaxSegSize = FrameLen - MinSegLen / 8;
     strdata_GetIntUnsigned(pStrData, 1, SameSegAllCh);
 
-    if (SameSegAllCh)
+    if (*SameSegAllCh)
     {
         strdata_GetIntUnsigned(pStrData, 1, &EndOfChannel);
 
@@ -316,7 +316,7 @@ void framereader_ReadTableMappingData(StrData *pStrData, int nChannels, int MaxN
 
     strdata_GetIntUnsigned(pStrData, 1, SameMapAllCh);
 
-    if (SameMapAllCh)
+    if (*SameMapAllCh)
     {
         for (int SegNr = 1; SegNr < S->lSegments[0]; SegNr++)
         {
