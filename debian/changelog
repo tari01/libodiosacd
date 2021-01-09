@@ -1,3 +1,11 @@
+libodiosacd (21.1.9) unstable; urgency=medium
+
+  * Fix missing de-referencing for some pointers
+  * Make sure the track artist is never NULL
+  * Try to use the album artist if track performer is missing
+
+ -- Robert Tari <robert@tari.in>  Sat, 1 Jan 2021 14:47:00 +0200
+
 libodiosacd (20.5.12) unstable; urgency=medium
 
   * Version bump
