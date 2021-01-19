@@ -1,3 +1,9 @@
+libodiosacd (21.1.19) unstable; urgency=medium
+
+  * Fix internal track count
+
+ -- Robert Tari <robert@tari.in>  Sat, 19 Jan 2021 19:41:00 +0200
+
 libodiosacd (21.1.9) unstable; urgency=medium
 
   * Fix missing de-referencing for some pointers
