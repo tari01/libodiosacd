@@ -303,27 +303,29 @@ int odiolibsacd_DoOpen(OdioLibSacd *pOdioLibSacd, char *sPath)
         }
     }
 
+    int nTracks = 0;
+
     if (m_nMediaType == ISO_TYPE)
     {
-        m_nTracks = disc_Open(pOdioLibSacd->cReader.pDisc, pOdioLibSacd->pMedia);
+        nTracks = disc_Open(pOdioLibSacd->cReader.pDisc, pOdioLibSacd->pMedia);
     }
     else if (m_nMediaType == DSDIFF_TYPE)
     {
-        m_nTracks = dff_Open(pOdioLibSacd->cReader.pDff, pOdioLibSacd->pMedia);
+        nTracks = dff_Open(pOdioLibSacd->cReader.pDff, pOdioLibSacd->pMedia);
     }
     else if (m_nMediaType == DSF_TYPE)
     {
-        m_nTracks = dsf_Open(pOdioLibSacd->cReader.pDsf, pOdioLibSacd->pMedia);
+        nTracks = dsf_Open(pOdioLibSacd->cReader.pDsf, pOdioLibSacd->pMedia);
     }
 
-    if (m_nTracks == 0)
+    if (nTracks == 0)
     {
         printf("PANIC: Failed to parse media\n");
 
         return 0;
     }
 
-    return m_nTracks;
+    return nTracks;
 }
 
 char* odiolibsacd_Init(OdioLibSacd *pOdioLibSacd, uint32_t nSubsong, int nSampleRate, Area nArea)
@@ -800,6 +802,7 @@ bool odiolibsacd_Open(char *sInFile, Area nArea)
             m_lTrackInfos[m_nTrackInfos - 1].nArea = AREA_MULCH;
             m_lTrackInfos[m_nTrackInfos - 1].nTrack = i;
             m_lTrackInfos[m_nTrackInfos - 1].nTrackInfo = m_nTrackInfos - 1;
+            m_nTracks++;
         }
     }
 
@@ -821,6 +824,7 @@ bool odiolibsacd_Open(char *sInFile, Area nArea)
             m_lTrackInfos[m_nTrackInfos - 1].nArea = AREA_TWOCH;
             m_lTrackInfos[m_nTrackInfos - 1].nTrack = i;
             m_lTrackInfos[m_nTrackInfos - 1].nTrackInfo = m_nTrackInfos - 1;
+            m_nTracks++;
         }
     }
 
