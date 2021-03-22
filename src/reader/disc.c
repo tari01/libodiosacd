@@ -117,7 +117,7 @@ static bool disc_ReadBlocksRaw(Disc *pDisc, uint32_t nStart, size_t nBlocks, uin
         {
             for (uint32_t i = 0; i < nBlocks; i++)
             {
-                media_Seek(pDisc->pMedia, (uint64_t)(nStart + i) * (uint64_t)2076, SEEK_SET);
+                media_Seek(pDisc->pMedia, (uint64_t)(nStart + i) * 2064 + 12, SEEK_SET);
 
                 if (media_Read(pDisc->pMedia, lData + i * 2048, 2048) != 2048)
                 {
@@ -773,6 +773,7 @@ int disc_Open(Disc *pDisc, Media *pMedia)
     char sacdmtoc[8];
     pDisc->nSectorSize = 0;
     pDisc->nBadReads = 0;
+
     media_Seek(pDisc->pMedia, 1044480, SEEK_SET);
 
     if (media_Read(pDisc->pMedia, sacdmtoc, 8) == 8)
@@ -784,7 +785,7 @@ int disc_Open(Disc *pDisc, Media *pMedia)
         }
     }
 
-    if (!media_Seek(pDisc->pMedia, 1058760, SEEK_SET))
+    if (!media_Seek(pDisc->pMedia, 1052652, SEEK_SET))
     {
         disc_Close(pDisc);
 
