@@ -115,8 +115,8 @@ typedef struct
     uint32_t nArea1Toc2Start;
     uint32_t nArea2Toc1Start;
     uint32_t nArea2Toc2Start;
-    uint8_t nDiscTypeReserved;
-    uint8_t nDiscTypeHybrid;
+    uint8_t nDiscTypeReserved : 7;
+    uint8_t nDiscTypeHybrid : 1;
     uint8_t lReserved4[3];
     uint16_t nArea1TocSize;
     uint16_t nArea2TocSize;
