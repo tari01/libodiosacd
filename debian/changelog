@@ -1,3 +1,10 @@
+libodiosacd (21.3.22) unstable; urgency=medium
+
+  * reader/sacd.h: Fix MasterToc packing
+  * reader/disc.c: Fix reading raw blocks with sector size of 2064
+
+ -- Robert Tari <robert@tari.in>  Mon, 22 Mar 2021 18:02:00 +0200
+
 libodiosacd (21.1.19) unstable; urgency=medium
 
   * Fix internal track count
