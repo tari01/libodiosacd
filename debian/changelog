@@ -1,3 +1,9 @@
+libodiosacd (21.3.28) unstable; urgency=medium
+
+  * Makefile: install into lib64 if it exists
+
+ -- Robert Tari <robert@tari.in>  Sun, 28 Mar 2021 22:19:00 +0100
+
 libodiosacd (21.3.22) unstable; urgency=medium
 
   * reader/sacd.h: Fix MasterToc packing
