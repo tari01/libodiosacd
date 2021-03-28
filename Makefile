@@ -9,6 +9,11 @@ LDFLAGS += -lpthread -lm -Ldecoder -Lconverter -Lreader -shared -Wl,-soname,libo
 VPATH = src
 OBJECTS = decoder/strdata decoder/acdata decoder/codedtable decoder/framereader decoder/decoderbase decoder/decoder converter/pcmfilter converter/dsdfilter converter/filtersetup converter/converterbase converter/converter reader/media reader/disc reader/dff reader/dsf libodiosacd
 SUBDIRS = $(VPATH) $(VPATH)/decoder $(VPATH)/converter $(VPATH)/reader
+LIBDIR = lib
+
+ifneq ($(wildcard $(DESTDIR)/usr/lib64),)
+    LIBDIR = lib64
+endif
 
 .PHONY: all clean install uninstall
 all: clean $(OBJECTS) odio-libsacd
@@ -37,8 +42,8 @@ clean:
 
 install:
 
-	$(shell install -Dt $(DESTDIR)/usr/lib ./data/usr/lib/libodiosacd.so)
-	$(shell ln -sf ./libodiosacd.so $(DESTDIR)/usr/lib/libodiosacd.so.1)
+	$(shell install -Dt $(DESTDIR)/usr/$(LIBDIR) ./data/usr/lib/libodiosacd.so)
+	$(shell ln -sf ./libodiosacd.so $(DESTDIR)/usr/$(LIBDIR)/libodiosacd.so.1)
 	$(shell install -Dt $(DESTDIR)/usr/include/libodiosacd ./src/libodiosacd.h)
 	$(shell install -Dt $(DESTDIR)/usr/include/libodiosacd/reader ./src/reader/disc.h)
 	$(shell install -Dt $(DESTDIR)/usr/include/libodiosacd/reader ./src/reader/media.h)
@@ -50,6 +55,6 @@ endif
 
 uninstall:
 
-	$(shell rm -f $(DESTDIR)/usr/lib/libodiosacd.so)
-	$(shell rm -f $(DESTDIR)/usr/lib/libodiosacd.so.1)
+	$(shell rm -f $(DESTDIR)/usr/$(LIBDIR)/libodiosacd.so)
+	$(shell rm -f $(DESTDIR)/usr/$(LIBDIR)/libodiosacd.so.1)
 	$(shell rm -fr $(DESTDIR)/usr/include/libodiosacd)
