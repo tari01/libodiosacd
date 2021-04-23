@@ -1,3 +1,9 @@
+libodiosacd (21.4.23) unstable; urgency=medium
+
+  * src/reader/disc.c: Make filenames FAT32-friendly
+
+ -- Robert Tari <robert@tari.in>  Fri, 23 Apr 2021 17:58:00 +0100
+
 libodiosacd (21.3.28) unstable; urgency=medium
 
   * Makefile: install into lib64 if it exists

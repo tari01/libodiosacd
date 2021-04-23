@@ -20,7 +20,7 @@
 #ifndef LIBODIOSACD_H
 #define LIBODIOSACD_H
 
-#define LIBVERSION "21.3.28"
+#define LIBVERSION "21.4.23"
 
 #include "reader/disc.h"
 #include "stdbool.h"
