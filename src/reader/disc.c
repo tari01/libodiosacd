@@ -1085,8 +1085,23 @@ char* disc_SetTrack(Disc *pDisc, uint32_t nTrack, Area nArea)
         free(sFormatted);
         char *sReplaced2 = string_Replace(sReplaced1, "\\", "-");
         free(sReplaced1);
-        pSacdArea->lFileNames[nTrack] = strdup(sReplaced2);
+        char *sReplaced3 = string_Replace(sReplaced2, "\"", "");
         free(sReplaced2);
+        char *sReplaced4 = string_Replace(sReplaced3, "*", "-");
+        free(sReplaced3);
+        char *sReplaced5 = string_Replace(sReplaced4, ":", "-");
+        free(sReplaced4);
+        char *sReplaced6 = string_Replace(sReplaced5, "<", "-");
+        free(sReplaced5);
+        char *sReplaced7 = string_Replace(sReplaced6, ">", "-");
+        free(sReplaced6);
+        char *sReplaced8 = string_Replace(sReplaced7, "?", "");
+        free(sReplaced7);
+        char *sReplaced9 = string_Replace(sReplaced8, "|", "-");
+        free(sReplaced8);
+
+        pSacdArea->lFileNames[nTrack] = strdup(sReplaced9);
+        free(sReplaced9);
 
         return pSacdArea->lFileNames[nTrack];
     }
