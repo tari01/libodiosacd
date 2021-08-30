@@ -1,3 +1,11 @@
+libodiosacd (21.8.30) unstable; urgency=medium
+
+  * src/decoder/decoderbase.c: Supress arithmetic decoding error
+  * src/decoder/decoder.c: Allow decoder to continue trough errors + display warning
+  * src/reader/disc.c: Ellipsize filename is longer than 255 characters
+
+ -- Robert Tari <robert@tari.in>  Mon, 30 Aug 2021 14:39:00 +0100
+
 libodiosacd (21.4.23) unstable; urgency=medium
 
   * src/reader/disc.c: Make filenames FAT32-friendly
