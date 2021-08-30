@@ -271,7 +271,7 @@ int decoderbase_Decode(DecoderBase *pDecoderBase, uint8_t* lDstFrame, int nFrame
 
         if (ACError != 1)
         {
-            printf("PANIC: Arithmetic decoding error\n");
+            //printf("PANIC: Arithmetic decoding error\n");
             rv = -1;
         }
     }

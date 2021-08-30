@@ -51,7 +51,6 @@ void* decoder_OnDecode(void* threadarg)
 
         if (nReturn == -1)
         {
-            printf("PANIC: decoder_OnDecode:decoderbase_Decode error\n");
             bError = true;
             decoderbase_Init(&pDecoderFrameSlot->cDecoderBase, pDecoderFrameSlot->nChannels, pDecoderFrameSlot->nSampleRate / 44100);
         }
@@ -161,7 +160,7 @@ int decoder_Decode(Decoder *pDecoder, uint8_t* lDstData, size_t nDstSize, uint8_
     {
         pthread_mutex_lock(&pDecoder->lDecoderFrameSlots[pDecoder->nSlot].hMutex);
 
-        while (pDecoder->lDecoderFrameSlots[pDecoder->nSlot].nDecoderSlotState != DECODER_READY)
+        while (pDecoder->lDecoderFrameSlots[pDecoder->nSlot].nDecoderSlotState != DECODER_READY && pDecoder->lDecoderFrameSlots[pDecoder->nSlot].nDecoderSlotState != DECODER_ERROR)
         {
             pthread_cond_wait(&pDecoder->lDecoderFrameSlots[pDecoder->nSlot].hEventGet, &pDecoder->lDecoderFrameSlots[pDecoder->nSlot].hMutex);
         }
@@ -176,6 +175,7 @@ int decoder_Decode(Decoder *pDecoder, uint8_t* lDstData, size_t nDstSize, uint8_
             *pDsdSize = (size_t)(pDecoder->nSampleRate / 8 / pDecoder->nFrameRate * pDecoder->nChannels);
             break;
         case DECODER_ERROR:
+            printf("\nPANIC: Failed to decode frame - inserting silence\n");
             *pDsdData = pDecoder->lDecoderFrameSlots[pDecoder->nSlot].lDsdData;
             *pDsdSize = (size_t)(pDecoder->nSampleRate / 8 / pDecoder->nFrameRate * pDecoder->nChannels);
             memset(*pDsdData, 0x69, *pDsdSize);

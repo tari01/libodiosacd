@@ -1068,18 +1068,48 @@ char* disc_SetTrack(Disc *pDisc, uint32_t nTrack, Area nArea)
         pDisc->nPacketInfo = 0;
         media_Seek(pDisc->pMedia, (uint64_t)pDisc->nTrackCurrentLsn * (uint64_t)pDisc->nSectorSize, SEEK_SET);
 
-        char *sFormatted;
+        char *sFormatted = calloc(256, 1);
+        char *pPosition = sFormatted;
+        sprintf(pPosition, "(%ich) %.2i. ", pDisc->nChannels, nTrack + 1);
+        pPosition += 10;
+        int nPerformerLength = strlen(pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer);
+        int nTitleLength = strlen(pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle);
 
-        if (strlen(pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer))
+        if (nPerformerLength > 0)
         {
-            sFormatted = calloc(17 + strlen(pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer) + strlen(pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle) + 1, 1);
-            sprintf(sFormatted, "(%ich) %.2i. %s - %s.wav", pDisc->nChannels, nTrack + 1, pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer, pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle);
+            if (nPerformerLength > 119)
+            {
+                nPerformerLength = 119;
+                snprintf(pPosition, nPerformerLength, "%s", pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer);
+                pPosition += nPerformerLength - 1;
+                sprintf(pPosition, "...");
+                pPosition += 3;
+            }
+            else
+            {
+                sprintf(pPosition, "%s", pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer);
+                pPosition += nPerformerLength;
+            }
+
+            sprintf(pPosition, " - ");
+            pPosition += 3;
+        }
+
+        if ((nPerformerLength + nTitleLength) > 238)
+        {
+            nTitleLength = 238 - nPerformerLength;
+            snprintf(pPosition, nTitleLength, "%s", pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle);
+            pPosition += nTitleLength - 1;
+            sprintf(pPosition, "...");
+            pPosition += 3;
         }
         else
         {
-            sFormatted = calloc(14 + strlen(pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle) + 1, 1);
-            sprintf(sFormatted, "(%ich) %.2i. %s.wav", pDisc->nChannels, nTrack + 1, pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle);
+            sprintf(pPosition, "%s", pSacdArea->lAreaTrackTexts[nTrack].sTrackTitle);
+            pPosition += nTitleLength;
         }
+
+        sprintf(pPosition, ".wav");
 
         char *sReplaced1 = string_Replace(sFormatted, "/", "-");
         free(sFormatted);
