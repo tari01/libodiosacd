@@ -4,7 +4,7 @@ ifndef O
 	O = 3
 endif
 
-CFLAGS = -g -O$O -Wall -fpic -Idecoder -Iconverter -Ireader
+CFLAGS = -g -O$O -Wall -Wno-format-truncation -fpic -Idecoder -Iconverter -Ireader
 LDFLAGS += -lpthread -lm -Ldecoder -Lconverter -Lreader -shared -Wl,-soname,libodiosacd.so.1
 VPATH = src
 OBJECTS = decoder/strdata decoder/acdata decoder/codedtable decoder/framereader decoder/decoderbase decoder/decoder converter/pcmfilter converter/dsdfilter converter/filtersetup converter/converterbase converter/converter reader/media reader/disc reader/dff reader/dsf libodiosacd
