@@ -1,3 +1,10 @@
+libodiosacd (22.6.16) unstable; urgency=medium
+
+  * src/reader/disc.c: Trim whitespaces from destination file names
+  * Makefile: Disable format truncation warning
+
+ -- Robert Tari <robert@tari.in>  Thu, 16 Jun 2022 21:10:00 +0100
+
 libodiosacd (21.8.30) unstable; urgency=medium
 
   * src/decoder/decoderbase.c: Supress arithmetic decoding error
