@@ -1,3 +1,9 @@
+libodiosacd (22.7.4) unstable; urgency=medium
+
+  * Makefile: Swap library and symlink file names
+
+ -- Robert Tari <robert@tari.in>  Thu, 4 Jul 2022 01:11:00 +0100
+
 libodiosacd (22.6.16) unstable; urgency=medium
 
   * src/reader/disc.c: Trim whitespaces from destination file names
