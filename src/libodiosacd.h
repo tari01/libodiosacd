@@ -1,5 +1,5 @@
 /*
-    Copyright 2015-2020 Robert Tari <robert@tari.in>
+    Copyright 2015-2023 Robert Tari <robert@tari.in>
 
     This file is part of Odio SACD library.
 
@@ -20,7 +20,7 @@
 #ifndef LIBODIOSACD_H
 #define LIBODIOSACD_H
 
-#define LIBVERSION "22.7.4"
+#define LIBVERSION "23.1.31"
 
 #include "reader/disc.h"
 #include "stdbool.h"
