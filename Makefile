@@ -50,7 +50,7 @@ install:
 	$(shell install -Dt $(DESTDIR)/usr/include/libodiosacd/reader ./src/reader/sacd.h)
 
 ifndef DESTDIR
-	ldconfig
+	ldconfig /usr/$(LIBDIR)
 endif
 
 uninstall:
