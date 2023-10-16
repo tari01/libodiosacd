@@ -1,5 +1,5 @@
 /*
-    Copyright 2015-2022 Robert Tari <robert@tari.in>
+    Copyright 2015-2023 Robert Tari <robert@tari.in>
     Copyright 2011-2019 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 
     This file is part of Odio SACD library.
@@ -1080,7 +1080,13 @@ char* disc_SetTrack(Disc *pDisc, uint32_t nTrack, Area nArea)
             if (nPerformerLength > 119)
             {
                 nPerformerLength = 119;
-                snprintf(pPosition, nPerformerLength, "%s", pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer);
+                int nWritten = snprintf (pPosition, nPerformerLength, "%s", pSacdArea->lAreaTrackTexts[nTrack].sTrackPerformer);
+
+                if (nWritten < 0)
+                {
+                    printf("\nPANIC: Error ellipsizing track performer\n");
+                }
+
                 pPosition += nPerformerLength - 1;
                 sprintf(pPosition, "...");
                 pPosition += 3;
