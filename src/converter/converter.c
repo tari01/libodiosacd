@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2015-2020 Robert Tari <robert@tari.in>
+    Copyright (c) 2015-2023 Robert Tari <robert@tari.in>
     Copyright (c) 2011-2015 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 
     This file is part of Odio SACD library.
@@ -141,7 +141,7 @@ bool converter_IsConvertCalled(Converter *pConverter)
 
 static ConverterSlot* converter_InitSlots(Converter *pConverter)
 {
-    pConverter->lConverterSlots = malloc(pConverter->nChannels * sizeof(ConverterSlot));
+    pConverter->lConverterSlots = calloc (pConverter->nChannels, sizeof (ConverterSlot));
 
     int nDsdSamples = pConverter->nDsdSampleRate / 8 / pConverter->nFrameRate;
     int nPcmSamples = pConverter->nPcmSampleRate / pConverter->nFrameRate;
