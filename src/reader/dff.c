@@ -1,5 +1,5 @@
 /*
-    Copyright 2015-2020 Robert Tari <robert@tari.in>
+    Copyright 2015-2023 Robert Tari <robert@tari.in>
     Copyright 2011-2019 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 
     This file is part of Odio SACD library.
@@ -75,12 +75,10 @@ static bool dff_IdEquals(const char *sId1, const char *sId2)
 
 static uint64_t dff_GetDstForFrame(Dff *pDff, uint32_t nFrame)
 {
-    uint64_t cur_offset;
     FrameIndex frame_index;
-    cur_offset = media_GetPosition(pDff->pMedia);
     nFrame = MIN(nFrame, (uint32_t)(pDff->nDstSize / sizeof(FrameIndex) - 1));
     media_Seek(pDff->pMedia, pDff->nDstOffset + nFrame * sizeof(FrameIndex), SEEK_SET);
-    cur_offset = media_GetPosition(pDff->pMedia);
+    uint64_t cur_offset = media_GetPosition (pDff->pMedia);
     media_Read(pDff->pMedia, &frame_index, sizeof(FrameIndex));
     media_Seek(pDff->pMedia, cur_offset, SEEK_SET);
 
