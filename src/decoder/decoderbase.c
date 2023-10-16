@@ -225,8 +225,8 @@ int decoderbase_Decode(DecoderBase *pDecoderBase, uint8_t* lDstFrame, int nFrame
     if (pDecoderBase->cFrameHeader.nDstCoded == 1)
     {
         ACData AC;
-        int16_t LT_ICoefI[12][16][256];
-        uint8_t LT_Status[6][16];
+        int16_t LT_ICoefI[12][16][256]= {0};
+        uint8_t LT_Status[6][16]= {0};
 
         decoderbase_FillTable4Bit(pDecoderBase, &pDecoderBase->cFrameHeader.cSegmentF, pDecoderBase->cFrameHeader.lFilter4Bit);
         decoderbase_FillTable4Bit(pDecoderBase, &pDecoderBase->cFrameHeader.cSegmentP, pDecoderBase->cFrameHeader.lPTable4Bit);
