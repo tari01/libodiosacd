@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.13)
-project (libodiosacd VERSION 23.8.1 LANGUAGES C)
+project (libodiosacd VERSION 23.11.1 LANGUAGES C)
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     SET (CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "..." FORCE)

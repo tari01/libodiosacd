@@ -1,3 +1,11 @@
+# 23.11.1
+
+ - src/decoder/decoderbase.c: Zero-fill filter tables (f514690)
+ - src/converter/converter.c: Use calloc to initialise converter slot array (60f71c9)
+ - src/reader/dff.c: Drop unused code (0cd0fa3)
+ - src/reader/disc.c: Check return value when ellipsizing track performer (fa7b383)
+ - Build using CMake (0948cd7)
+
 # 23.8.1
 
  - Merge pull request #6 from plstonge/doc-filters (6c27f3e)
