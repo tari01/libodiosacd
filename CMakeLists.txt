@@ -23,7 +23,9 @@ endif ()
 
 # Prerequisites
 
+set (THREADS_PREFER_PTHREAD_FLAG ON)
 include (GNUInstallDirs)
+find_package (Threads REQUIRED)
 
 # Build
 
