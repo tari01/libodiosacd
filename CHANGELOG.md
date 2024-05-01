@@ -1,3 +1,7 @@
+# 24.5.1
+
+ - Explicitly depend on and link against threads (4926422)
+
 # 23.11.1
 
  - src/decoder/decoderbase.c: Zero-fill filter tables (f514690)
