@@ -1,5 +1,5 @@
 /*
-    Copyright 2015-2023 Robert Tari <robert@tari.in>
+    Copyright 2015-2025 Robert Tari <robert@tari.in>
     Copyright 2011-2019 Maxim V.Anisiutkin <maxim.anisiutkin@gmail.com>
 
     This file is part of Odio SACD library.
@@ -345,10 +345,14 @@ static bool disc_ReadAreaToc(Disc *pDisc, int area_idx)
 
     p += 2048;
 
+    bool bHasText = false;
+
     while (p < (pAreaData + pAreaToc->nSize * 2048))
     {
         if (strncmp((char*)p, "SACDTTxt", 8) == 0)
         {
+            bHasText = true;
+
             if (sacd_text_idx == 0)
             {
                 for (uint8_t i = 0; i < pAreaToc->nTrackCount; i++)
@@ -506,6 +510,49 @@ static bool disc_ReadAreaToc(Disc *pDisc, int area_idx)
         else
         {
             break;
+        }
+    }
+
+    if (!bHasText)
+    {
+        for (uint8_t i = 0; i < pAreaToc->nTrackCount; i++)
+        {
+            pSacdArea->lAreaTrackTexts[i].sTrackTitle = strdup ("Unknown Track");
+            pSacdArea->lAreaTrackTexts[i].sTrackPerformer = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackSongwriter = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackComposer = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackArranger = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackMessage = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackExtraMessage = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackTitlePhonetic = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackPerformerPhonetic = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackSongwriterPhonetic = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackComposerPhonetic = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackArrangerPhonetic = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackMessagePhonetic = NULL;
+            pSacdArea->lAreaTrackTexts[i].sTrackExtraMessagePhonetic = NULL;
+
+            if (pDisc->cSacd.cMasterText.sAlbumArtist == NULL)
+            {
+                pSacdArea->lAreaTrackTexts[i].sTrackPerformer = strdup ("Unknown Artist");
+            }
+            else
+            {
+                pSacdArea->lAreaTrackTexts[i].sTrackPerformer = strdup (pDisc->cSacd.cMasterText.sAlbumArtist);
+            }
+
+            if (nArea == AREA_TWOCH)
+            {
+                pDisc->cDiscDetails.lTwoChTrackDetails[i].sTrackTitle = pSacdArea->lAreaTrackTexts[i].sTrackTitle;
+                pDisc->cDiscDetails.lTwoChTrackDetails[i].sTrackPerformer = pSacdArea->lAreaTrackTexts[i].sTrackPerformer;
+                pDisc->cDiscDetails.lTwoChTrackDetails[i].nChannels = pAreaToc->nChannels;
+            }
+            else
+            {
+                pDisc->cDiscDetails.lMulChTrackDetails[i].sTrackTitle = pSacdArea->lAreaTrackTexts[i].sTrackTitle;
+                pDisc->cDiscDetails.lMulChTrackDetails[i].sTrackPerformer = pSacdArea->lAreaTrackTexts[i].sTrackPerformer;
+                pDisc->cDiscDetails.lMulChTrackDetails[i].nChannels = pAreaToc->nChannels;
+            }
         }
     }
 
