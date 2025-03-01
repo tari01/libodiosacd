@@ -1,3 +1,7 @@
+# 25.3.1
+
+ - src/reader/disc.c: Handle disks with no SACDTTxt field (df06c8c)
+
 # 24.5.1
 
  - Explicitly depend on and link against threads (4926422)
