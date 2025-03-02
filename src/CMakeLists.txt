@@ -21,7 +21,7 @@ set(SOURCES
 
 add_library ("odiosacd" SHARED ${SOURCES})
 set_target_properties ("odiosacd" PROPERTIES VERSION 1.0.0 SOVERSION 1)
-target_link_libraries ("odiosacd" m Threads::Threads)
+target_link_libraries ("odiosacd" m Threads::Threads Iconv::Iconv)
 install (TARGETS "odiosacd" LIBRARY DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}")
 
 # reader/disc.h
