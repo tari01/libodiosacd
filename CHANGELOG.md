@@ -1,3 +1,7 @@
+# 25.4.1
+
+ - Explicitly depend on and link against Iconv (84bb6fe)
+
 # 25.3.1
 
  - src/reader/disc.c: Handle disks with no SACDTTxt field (df06c8c)
